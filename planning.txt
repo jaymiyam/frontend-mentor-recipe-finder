@@ -1,0 +1,28 @@
+|-homepage
+    |-layout
+        |-navbar
+        |-footer
+    |-page
+|-about
+    |-page
+|-recipes
+    |-page
+    |-[id]
+        |-page
+|- error page
+|- loading page
+|- not found page
+
+functionality
+- search by name or ingredient
+- filter by max prep time
+- filter by max cook time
+- mongoDB for database
+- cloudinary for cloud images
+- CRUD of recipes
+
+steps:
+1. next font setup
+2. custom colors setup
+3. navbar & footer
+
