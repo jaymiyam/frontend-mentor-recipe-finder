@@ -39,7 +39,7 @@ export default function HomePage() {
               className="rounded-xl overflow-hidden"
             />
           </div>
-
+          {/* Features Section */}
           <div className="border-b border-neutral-200 pb-20">
             <h2 className="font-heading font-extrabold text-neutral-900 text-5xl mb-12 text-center">
               What you&apos;ll get
