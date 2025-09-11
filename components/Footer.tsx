@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="py-5 px-15">
+    <footer className="py-10 px-15">
       <div className="mx-auto max-w-[1200px] flex justify-between items-center">
         <p>Made with ❤️ and 🥑</p>
         <div className="flex gap-6">

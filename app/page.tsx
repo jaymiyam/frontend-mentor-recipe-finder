@@ -1,7 +1,103 @@
+import CallToAction from '@/components/CallToAction';
+import PrimaryButton from '@/components/PrimaryButton';
+import FeatureCard from '@/components/FeatureCard';
+import Image from 'next/image';
+import hero from '@/assets/images/image-home-hero-large.webp';
+import wholeFood from '@/assets/images/icon-whole-food-recipes.svg';
+import minimumFuss from '@/assets/images/icon-minimum-fuss.svg';
+import searchInSeconds from '@/assets/images/icon-search-in-seconds.svg';
+import realLife from '@/assets/images/image-home-real-life-large.webp';
+
 export default function HomePage() {
   return (
-    <section>
-      <h1 className="text-3xl">homepage</h1>
-    </section>
+    <>
+      <section className="w-full bg-[url('/images/pattern-squiggle-1.svg')] bg-contain bg-no-repeat bg-[center_top_17%]">
+        <div className="max-w-[1200px] mx-auto pt-20 pb-24">
+          <div className="text-center flex flex-col items-center justify-center">
+            <h1 className=" font-heading font-extrabold text-neutral-900 text-7xl mb-4">
+              <span className="relative">
+                <span
+                  className="absolute w-full h-[40%] rounded-sm bottom-2 bg-orange-500/40"
+                  aria-hidden="true"
+                />
+                <span className="relative">Healthy</span>
+              </span>{' '}
+              meals, zero fuss
+            </h1>
+            <p className="text-xl mb-10 max-w-[50ch]">
+              Discover eight quick, whole-food recipes that you can cook
+              tonight—no processed junk, no guesswork.
+            </p>
+            <PrimaryButton text="Start exploring" classes="px-8 py-4" />
+          </div>
+          <div className="my-20 rounded-3xl overflow-hidden border-12 border-white bg-white">
+            <Image
+              src={hero}
+              width={2384}
+              height={1060}
+              alt="a women smiling while preparing a salad in a bright kitchen"
+              className="rounded-xl overflow-hidden"
+            />
+          </div>
+
+          <div className="border-b border-neutral-200 pb-20">
+            <h2 className="font-heading font-extrabold text-neutral-900 text-5xl mb-12 text-center">
+              What you&apos;ll get
+            </h2>
+            <div className="flex justify-between items-start">
+              <FeatureCard
+                icon={wholeFood}
+                title="Whole-food recipes"
+                text="Each dish uses everyday, unprocessed ingredients."
+                size={20}
+              />
+              <FeatureCard
+                icon={minimumFuss}
+                title="Minimum fuss"
+                text="All recipes are designed to make eating healthy quick and easy."
+              />
+              <FeatureCard
+                icon={searchInSeconds}
+                title="Search in seconds"
+                text="Filter by name or ingredient and jump straight to the recipe you need."
+              />
+            </div>
+          </div>
+          <div className="flex items-center justify-between gap-16 pt-20">
+            <div>
+              <h2 className="font-heading text-neutral-900 font-extrabold text-5xl mb-12">
+                Built for real life
+              </h2>
+              <p className="text-xl max-w-[80ch] leading-relaxed mb-4">
+                Cooking shouldn’t be complicated. These recipes come in under{' '}
+                <span className="relative">
+                  <span
+                    className="absolute w-full h-[40%] rounded-sm bottom-1 bg-orange-500/75"
+                    aria-hidden="true"
+                  />
+                  <span className="relative">30 minutes</span>
+                </span>{' '}
+                of active time, fit busy schedules, and taste good enough to
+                repeat.
+              </p>
+              <p className="text-xl max-w-[80ch] leading-relaxed">
+                Whether you’re new to the kitchen or just need fresh ideas,
+                we’ve got you covered.
+              </p>
+            </div>
+            <div>
+              <Image
+                src={realLife}
+                width={1270}
+                height={900}
+                alt="built for real life"
+                className="rounded-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <CallToAction />
+    </>
   );
 }

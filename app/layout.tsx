@@ -43,7 +43,7 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={`${nunito.variable} ${nunitoSans.variable}`}>
-      <body className="font-body bg-neutral-100 text-neutral-900">
+      <body className="font-body bg-neutral-100 text-neutral-800">
         <Navbar />
         <main>{children}</main>
         <Footer />
