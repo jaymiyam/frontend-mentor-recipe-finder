@@ -51,6 +51,7 @@ export default function Navbar() {
         <PrimaryButton
           text="Browse Recipes"
           classes="justify-self-end px-4 py-3"
+          path="/recipes"
         />
 
         {/* Mobile menu button */}

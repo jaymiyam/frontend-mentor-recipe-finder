@@ -14,7 +14,11 @@ export default function CallToAction() {
           Hit the button, pick a recipe, and get dinner on the table—fast.
         </p>
       </div>
-      <PrimaryButton text="Browser recipes" classes="relative z-1 px-4 py-3" />
+      <PrimaryButton
+        text="Browser recipes"
+        classes="relative z-1 px-4 py-3"
+        path="/recipes"
+      />
       <Image
         src={fork}
         width={315}

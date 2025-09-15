@@ -16,7 +16,7 @@ export default function AboutPage() {
               <span className="py-1 px-1.5 bg-orange-500 text-neutral-900 font-heading font-bold text-xl rounded-sm">
                 Our mission
               </span>
-              <h2 className="font-heading text-neutral-900 font-extrabold text-5xl text-balance leading-tight">
+              <h2 className="font-heading text-neutral-900 tracking-tight font-extrabold text-5xl text-balance leading-tight">
                 Help more people cook nourishing meals, more often.
               </h2>
               <p className="text-xl max-w-[45ch] leading-relaxed">
