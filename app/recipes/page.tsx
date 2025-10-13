@@ -26,6 +26,7 @@ export default function RecipesPage() {
             placeholder="Search by name or ingredient..."
           />
         </form>
+        {/* Recipe Cards Grid */}
         <div className="w-full grid grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
           {recipes.length === 0 ? (
             <p>No recipes found</p>

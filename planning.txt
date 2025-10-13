@@ -1,10 +1,10 @@
 |-homepage
-    |-layout
-        |-navbar
-        |-footer
+    |-layout (done)
+        |-navbar (done)
+        |-footer (done)
     |-page
 |-about
-    |-page
+    |-page (done)
 |-recipes
     |-page
     |-[id]
@@ -17,12 +17,6 @@ functionality
 - search by name or ingredient
 - filter by max prep time
 - filter by max cook time
-- mongoDB for database
+- mongoDB for database (?)
 - cloudinary for cloud images
 - CRUD of recipes
-
-steps:
-1. next font setup
-2. custom colors setup
-3. navbar & footer
-

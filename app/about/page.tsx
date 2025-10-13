@@ -9,6 +9,7 @@ import squiggle from '@/assets/images/pattern-squiggle-2.svg';
 export default function AboutPage() {
   return (
     <>
+      {/* Headline section */}
       <section>
         <div className="max-w-[1200px] mx-auto">
           <div className="py-20 flex items-center gap-14 justify-between border-b border-b-neutral-200">
