@@ -1,14 +1,16 @@
-type AboutBulletPointProps = {
-  title: string;
+type BulletPointProps = {
+  title?: string;
   text: string;
+  noTitle?: boolean;
 };
 
-export default function AboutBulletPoint({
+export default function BulletPoint({
   title,
   text,
-}: AboutBulletPointProps) {
+  noTitle,
+}: BulletPointProps) {
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 items-start">
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -29,9 +31,11 @@ export default function AboutBulletPoint({
         </svg>
       </div>
       <div>
-        <h4 className="font-heading font-bold text-neutral-900 text-2xl mb-3">
-          {title}
-        </h4>
+        {!noTitle && (
+          <h4 className="font-heading font-bold text-neutral-900 text-2xl mb-3">
+            {title}
+          </h4>
+        )}
         <p>{text}</p>
       </div>
     </div>
