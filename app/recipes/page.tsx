@@ -1,7 +1,25 @@
+'use client';
+import { useState } from 'react';
 import RecipeCard from '@/components/RecipeCard';
+import RecipeFilterForm from '@/components/RecipeFilterForm';
 import recipes from '@/data.json';
 
 export default function RecipesPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [maxCooktime, setMaxCooktime] = useState(20);
+  const [maxPreptime, setMaxPreptime] = useState(15);
+
+  // filteredRecipes will be updated whenever searchQuery change and trigger re-render
+  const filteredRecipes = recipes.filter((r) => {
+    const matchSearchQuery = r.title
+      .toLowerCase()
+      .includes(searchQuery.trim().toLowerCase());
+    const matchMaxCooktime = r.cookMinutes <= maxCooktime;
+    const matchMaxPreptime = r.prepMinutes <= maxPreptime;
+
+    return matchSearchQuery && matchMaxCooktime && matchMaxPreptime;
+  });
+
   return (
     <section>
       <div className="max-w-[1200px] mx-auto">
@@ -17,21 +35,20 @@ export default function RecipesPage() {
           </p>
         </div>
         {/* Search and filtering */}
-        <form className="mb-6">
-          <input
-            className="bg-white p-2 rounded-sm border border-neutral-200 w-[280px]"
-            type="text"
-            name="query"
-            id="query"
-            placeholder="Search by name or ingredient..."
-          />
-        </form>
+        <RecipeFilterForm
+          searchQuery={searchQuery}
+          onSearhQueryChange={setSearchQuery}
+          maxCooktime={maxCooktime}
+          onMaxCooktimeChange={setMaxCooktime}
+          maxPreptime={maxPreptime}
+          onMaxPreptimeChange={setMaxPreptime}
+        />
         {/* Recipe Cards Grid */}
         <div className="w-full grid grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
-          {recipes.length === 0 ? (
+          {filteredRecipes.length === 0 ? (
             <p>No recipes found</p>
           ) : (
-            recipes.map((recipe) => (
+            filteredRecipes.map((recipe) => (
               <RecipeCard
                 key={recipe.id}
                 id={recipe.id.toString()}
