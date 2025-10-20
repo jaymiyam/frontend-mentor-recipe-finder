@@ -11,13 +11,13 @@ export default function AboutPage() {
     <>
       {/* Headline section */}
       <section>
-        <div className="max-w-[1200px] mx-auto">
-          <div className="py-20 flex items-center gap-14 justify-between border-b border-b-neutral-200">
+        <div className="max-w-[1200px] mx-8 xl:mx-auto">
+          <div className="py-20 flex flex-col md:flex-row items-center gap-14 justify-between border-b border-b-neutral-200">
             <div className="flex flex-col gap-6 items-start justify-center">
               <span className="py-1 px-1.5 bg-orange-500 text-neutral-900 font-heading font-bold text-xl rounded-sm">
                 Our mission
               </span>
-              <h2 className="font-heading text-neutral-900 tracking-tight font-extrabold text-5xl text-balance leading-tight">
+              <h2 className="font-heading text-neutral-900 tracking-tight font-extrabold text-4xl md:text-5xl text-balance leading-tight">
                 Help more people cook nourishing meals, more often.
               </h2>
               <p className="text-xl max-w-[45ch] leading-relaxed">
@@ -82,10 +82,10 @@ export default function AboutPage() {
         />
       </AboutFeatures>
       <section>
-        <div className="max-w-[1200px] mx-auto">
-          <div className="py-24 flex items-center justify-between gap-14">
+        <div className="max-w-[1200px] mx-8 xl:mx-auto">
+          <div className="py-24 flex flex-col md:flex-row items-center justify-between gap-14">
             <div className="flex flex-col gap-6 items-start justify-center">
-              <h2 className="font-heading text-neutral-900 font-extrabold text-5xl text-balance leading-tight">
+              <h2 className="font-heading text-neutral-900 font-extrabold text-4xl md:text-5xl leading-tight">
                 Beyond the plate
               </h2>
               <p className="text-xl max-w-[45ch] leading-relaxed">
@@ -102,13 +102,13 @@ export default function AboutPage() {
                 </li>
               </ul>
             </div>
-            <div>
+            <div className="w-full">
               <Image
                 src={beyondThePlate}
                 width={1488}
                 height={800}
                 alt=""
-                className="max-w-[750px] rounded-2xl"
+                className="rounded-2xl"
               />
             </div>
           </div>

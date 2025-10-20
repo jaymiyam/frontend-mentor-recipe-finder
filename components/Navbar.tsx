@@ -51,6 +51,7 @@ export default function Navbar() {
         <PrimaryButton
           text="Browse Recipes"
           classes="justify-self-end px-4 py-3"
+          hiddenOnMobile
           path="/recipes"
         />
 
@@ -77,7 +78,7 @@ export default function Navbar() {
         </button>
         {/* Mobile Nav and Button */}
         {isMobileMenuOpen && (
-          <div className="absolute w-full top-[150%] left-0 p-2 bg-white border border-neutral-300 rounded-lg shadow-md">
+          <div className="absolute z-99 w-full top-[150%] left-0 p-2 bg-white border border-neutral-300 rounded-lg shadow-md">
             <nav className=" flex flex-col">
               <Link
                 href="/"

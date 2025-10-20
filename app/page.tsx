@@ -12,9 +12,9 @@ export default function HomePage() {
   return (
     <>
       <section className="w-full bg-[url('/images/pattern-squiggle-1.svg')] bg-contain bg-no-repeat bg-[center_top_17%]">
-        <div className="max-w-[1200px] mx-auto pt-20 pb-24">
-          <div className="text-center flex flex-col items-center justify-center">
-            <h1 className=" font-heading font-extrabold tracking-tight text-neutral-900 text-7xl mb-4">
+        <div className="max-w-[1200px] mx-8 xl:mx-auto pt-20 pb-24">
+          <div className="text-left md:text-center flex flex-col items-start md:items-center justify-center">
+            <h1 className=" font-heading font-extrabold tracking-tight text-neutral-900 text-5xl sm:text-7xl mb-4">
               <span className="relative">
                 <span
                   className="absolute w-full h-[40%] rounded-sm bottom-2 bg-orange-500/40"
@@ -34,7 +34,7 @@ export default function HomePage() {
               path="/recipes"
             />
           </div>
-          <div className="my-20 rounded-3xl overflow-hidden border-12 border-white bg-white">
+          <div className="my-20 rounded-3xl overflow-hidden border-4 md:border-12 border-white bg-white">
             <Image
               src={hero}
               width={2384}
@@ -45,10 +45,10 @@ export default function HomePage() {
           </div>
           {/* Features Section */}
           <div className="border-b border-neutral-200 pb-20">
-            <h2 className="font-heading font-extrabold tracking-tight text-neutral-900 text-5xl mb-12 text-center">
+            <h2 className="font-heading font-extrabold tracking-tight text-neutral-900 text-5xl mb-12 text-left md:text-center">
               What you&apos;ll get
             </h2>
-            <div className="flex justify-between items-start">
+            <div className="flex flex-col gap-10 md:flex-row justify-between items-start">
               <FeatureCard
                 icon={wholeFood}
                 title="Whole-food recipes"
@@ -67,9 +67,9 @@ export default function HomePage() {
               />
             </div>
           </div>
-          <div className="flex items-center justify-between gap-16 pt-20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-16 pt-20">
             <div>
-              <h2 className="font-heading text-neutral-900 tracking-tight font-extrabold text-5xl mb-12">
+              <h2 className="font-heading text-neutral-900 tracking-tight font-extrabold text-5xl mb-4 md:mb-12">
                 Built for real life
               </h2>
               <p className="text-xl max-w-[80ch] leading-relaxed mb-4">

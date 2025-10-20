@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="py-10 px-15">
-      <div className="mx-auto max-w-[1200px] flex justify-between items-center">
+    <footer className="py-10 px-8 lg:px-15">
+      <div className="mx-auto max-w-[1200px] flex flex-col-reverse gap-6 md:flex-row justify-center md:justify-between items-center">
         <p>Made with ❤️ and 🥑</p>
         <div className="flex gap-6">
           <Link href={`https://bsky.app/`}>
