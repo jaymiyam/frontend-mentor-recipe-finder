@@ -23,16 +23,16 @@ const RecipeFilterForm = ({
   const [showMaxPreptime, setShowMaxPreptime] = useState(false);
 
   return (
-    <form className="mb-6 flex justify-between items-center">
-      <div className="flex gap-2 justify-start items-center">
+    <form className="mb-6 flex flex-col gap-2 md:flex-row justify-between md:items-center">
+      <div className="flex flex-col md:flex-row gap-2 justify-start items-center">
         {/* Max prep time filter */}
-        <div className="relative">
+        <div className="relative w-full">
           <button
             onClick={() => setShowMaxPreptime((prev) => !prev)}
             type="button"
-            className="cursor-pointer bg-white py-2 px-3 rounded-md border border-neutral-200 flex justify-between items-center gap-2 text-base font-semibold"
+            className="cursor-pointer w-full bg-white py-2 px-3 rounded-md border border-neutral-200 flex justify-center items-center gap-2 text-base font-semibold"
           >
-            <span>Max Prep Time</span>
+            <span className="whitespace-nowrap">Max Prep Time</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -49,7 +49,7 @@ const RecipeFilterForm = ({
             </svg>
           </button>
           {showMaxPreptime && (
-            <fieldset className="absolute mt-1 w-full bg-white py-2 px-3 rounded-md border border-neutral-200">
+            <fieldset className="absolute z-99 mt-1 w-full bg-white py-2 px-3 rounded-md border border-neutral-200">
               <legend className="sr-only">Select maximum prep time:</legend>
 
               <div className="text-base font-semibold py-2">
@@ -98,13 +98,13 @@ const RecipeFilterForm = ({
           )}
         </div>
         {/* Max cook time filter */}
-        <div className="relative">
+        <div className="relative w-full">
           <button
             onClick={() => setShowMaxCooktime((prev) => !prev)}
             type="button"
-            className="cursor-pointer bg-white py-2 px-3 rounded-md border border-neutral-200 flex justify-between items-center gap-2 text-base font-semibold"
+            className="cursor-pointer w-full bg-white py-2 px-3 rounded-md border border-neutral-200 flex justify-center items-center gap-2 text-base font-semibold"
           >
-            <span>Max Cook Time</span>
+            <span className="whitespace-nowrap">Max Cook Time</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -121,7 +121,7 @@ const RecipeFilterForm = ({
             </svg>
           </button>
           {showMaxCooktime && (
-            <fieldset className="absolute mt-1 w-full bg-white py-2 px-3 rounded-md border border-neutral-200">
+            <fieldset className="absolute z-99 mt-1 w-full bg-white py-2 px-3 rounded-md border border-neutral-200">
               <legend className="sr-only">Select maximum cook time:</legend>
 
               <div className="text-base font-semibold py-2">
@@ -185,7 +185,7 @@ const RecipeFilterForm = ({
         </div>
       </div>
       {/* Search input */}
-      <div className="bg-white p-2 rounded-md border border-neutral-200 w-[280px] flex items-center gap-2">
+      <div className="bg-white p-2 rounded-md border border-neutral-200 w-full md:w-[280px] flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

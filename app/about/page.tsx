@@ -83,7 +83,7 @@ export default function AboutPage() {
       </AboutFeatures>
       <section>
         <div className="max-w-[1200px] mx-8 xl:mx-auto">
-          <div className="py-24 flex flex-col md:flex-row items-center justify-between gap-14">
+          <div className="py-20 md:py-24 flex flex-col md:flex-row items-center justify-between gap-14">
             <div className="flex flex-col gap-6 items-start justify-center">
               <h2 className="font-heading text-neutral-900 font-extrabold text-4xl md:text-5xl leading-tight">
                 Beyond the plate

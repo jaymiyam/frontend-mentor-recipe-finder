@@ -99,9 +99,12 @@ export default function Navbar() {
                 Recipes
               </Link>
             </nav>
-            <button className="block w-full px-4 py-3 bg-neutral-900 text-white font-heading font-bold text-xl rounded-xl">
+            <Link
+              href="/recipes"
+              className="block w-full px-4 py-3 bg-neutral-900 text-center text-white font-heading font-bold text-xl rounded-xl"
+            >
               Browser recipes
-            </button>
+            </Link>
           </div>
         )}
       </div>

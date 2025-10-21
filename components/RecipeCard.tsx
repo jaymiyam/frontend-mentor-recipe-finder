@@ -22,7 +22,7 @@ export default function RecipeCard({
 }: RecipeCardProps) {
   const formattedTitle = title.length > 30 ? `${title.slice(0, 30)}...` : title;
   return (
-    <div className="max-w-[376px] h-full bg-white rounded-sm p-2 flex flex-col gap-4 justify-between leading-tight">
+    <div className="w-full md:max-w-[376px] h-full bg-white rounded-sm p-2 flex flex-col gap-4 justify-between leading-tight">
       <div className="w-full rounded-sm overflow-hidden max-h-[300px]">
         <Image
           src={image}
@@ -34,7 +34,7 @@ export default function RecipeCard({
       </div>
 
       <h3 className="font-bold font-heading text-neutral-900 text-xl whitespace-nowrap overflow-hidden text-ellipsis">
-        {title}
+        {formattedTitle}
       </h3>
       <p className="text-base leading-normal">{overview}</p>
       <div className="flex flex-wrap gap-4 text-base">

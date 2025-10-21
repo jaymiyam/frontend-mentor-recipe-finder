@@ -20,8 +20,9 @@ const RecipePage = async ({ params }) => {
 
   return (
     <section>
-      <div className="max-w-[1200px] mx-auto">
-        <div className="py-20 border-b border-b-neutral-200">
+      <div className="max-w-[1200px] mx-8 xl:mx-auto">
+        <div className="py-16 md:py-20 border-b border-b-neutral-200">
+          {/* Breadcrumbs */}
           <div className="mb-4 text-lg">
             <Link href="/recipes" className="opacity-80">
               Recipes /{' '}
@@ -30,7 +31,8 @@ const RecipePage = async ({ params }) => {
               {recipe.title}
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-14">
+          {/* Recipe main content */}
+          <div className="grid md:grid-cols-2 gap-10 md:gap-14">
             <div className="relative">
               <Image
                 src={recipe.image.large}
@@ -41,13 +43,13 @@ const RecipePage = async ({ params }) => {
               />
             </div>
             <div className="flex flex-col gap-6 items-start justify-center">
-              <h2 className="font-heading text-neutral-900 tracking-tight font-extrabold text-5xl leading-tight">
+              <h2 className="font-heading text-neutral-900 tracking-tight font-extrabold text-4xl md:text-5xl leading-tight">
                 {recipe.title}
               </h2>
               <p className="text-xl max-w-[45ch] leading-relaxed">
                 {recipe.overview}
               </p>
-              <div className="flex flex-wrap gap-4 text-base">
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-base">
                 <span className="flex gap-1 shrink-0 font-semibold text-lg">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -127,12 +129,12 @@ const RecipePage = async ({ params }) => {
             </div>
           </div>
         </div>
-        {/* TODO: More recipes */}
-        <div className="py-20 border-b border-b-neutral-200">
+        {/* More recipes */}
+        <div className="py-16 md:py-20 border-b border-b-neutral-200">
           <h2 className="font-heading text-neutral-900 tracking-tight font-bold text-4xl leading-tight mb-6">
             More recipes
           </h2>
-          <div className="w-full grid grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
+          <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
             {moreRecipes.map((recipe) => (
               <RecipeCard
                 key={recipe.id}

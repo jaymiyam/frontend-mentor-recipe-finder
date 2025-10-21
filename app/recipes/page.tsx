@@ -22,9 +22,10 @@ export default function RecipesPage() {
 
   return (
     <section>
-      <div className="max-w-[1200px] mx-auto">
-        <div className="py-20 text-center flex flex-col items-center justify-center">
-          <h1 className=" font-heading font-extrabold tracking-tight text-neutral-900 text-5xl mb-4">
+      <div className="max-w-[1200px] mx-8 xl:mx-auto">
+        {/* Hero section */}
+        <div className="py-16 md:py-20 text-left md:text-center text-pretty flex flex-col items-center justify-center">
+          <h1 className=" font-heading font-extrabold tracking-tight text-neutral-900 text-4xl md:text-5xl mb-4">
             Explore our simple, healthy recipes
           </h1>
           <p className="text-xl max-w-[60ch] text-pretty">
@@ -44,7 +45,7 @@ export default function RecipesPage() {
           onMaxPreptimeChange={setMaxPreptime}
         />
         {/* Recipe Cards Grid */}
-        <div className="w-full grid grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
+        <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
           {filteredRecipes.length === 0 ? (
             <p>No recipes found</p>
           ) : (
