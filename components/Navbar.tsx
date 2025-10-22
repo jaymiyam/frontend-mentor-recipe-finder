@@ -25,7 +25,7 @@ export default function Navbar() {
         <nav className="hidden lg:block space-x-10">
           <Link
             href="/"
-            className={`cursor-pointer font-heading font-semibold text-lg  ${
+            className={`cursor-pointer font-heading font-semibold text-lg hover:border-b-3 hover:border-orange-500 ${
               path === '/' ? 'border-b-3 border-orange-500' : ''
             }`}
           >
@@ -33,7 +33,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/about"
-            className={`cursor-pointer font-heading font-semibold text-lg ${
+            className={`cursor-pointer font-heading font-semibold text-lg hover:border-b-3 hover:border-orange-500 ${
               path === '/about' ? 'border-b-3 border-orange-500' : ''
             } `}
           >
@@ -41,7 +41,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/recipes"
-            className={`cursor-pointer font-heading font-semibold text-lg ${
+            className={`cursor-pointer font-heading font-semibold text-lg hover:border-b-3 hover:border-orange-500 ${
               path === '/recipes' ? 'border-b-3 border-orange-500' : ''
             }`}
           >

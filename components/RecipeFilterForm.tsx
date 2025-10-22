@@ -30,7 +30,9 @@ const RecipeFilterForm = ({
           <button
             onClick={() => setShowMaxPreptime((prev) => !prev)}
             type="button"
-            className="cursor-pointer w-full bg-white py-2 px-3 rounded-md border border-neutral-200 flex justify-center items-center gap-2 text-base font-semibold"
+            className={`cursor-pointer w-full bg-white py-2 px-3 rounded-md border border-neutral-200 hover:border-neutral-900 flex justify-center items-center gap-2 text-base font-semibold ${
+              showMaxPreptime ? 'border-neutral-900' : ''
+            }`}
           >
             <span className="whitespace-nowrap">Max Prep Time</span>
             <svg
@@ -102,7 +104,9 @@ const RecipeFilterForm = ({
           <button
             onClick={() => setShowMaxCooktime((prev) => !prev)}
             type="button"
-            className="cursor-pointer w-full bg-white py-2 px-3 rounded-md border border-neutral-200 flex justify-center items-center gap-2 text-base font-semibold"
+            className={`cursor-pointer w-full bg-white py-2 px-3 rounded-md border border-neutral-200 hover:border-neutral-900 flex justify-center items-center gap-2 text-base font-semibold ${
+              showMaxCooktime ? 'border-neutral-900' : ''
+            }`}
           >
             <span className="whitespace-nowrap">Max Cook Time</span>
             <svg
@@ -185,7 +189,7 @@ const RecipeFilterForm = ({
         </div>
       </div>
       {/* Search input */}
-      <div className="bg-white p-2 rounded-md border border-neutral-200 w-full md:w-[280px] flex items-center gap-2">
+      <div className="bg-white p-2 rounded-md border border-neutral-200 hover:border-neutral-900 w-full md:w-[280px] flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

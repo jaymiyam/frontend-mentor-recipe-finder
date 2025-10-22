@@ -16,7 +16,7 @@ export default function PrimaryButton({
   return (
     <Link
       href={path}
-      className={`cursor-pointer bg-neutral-900 text-white font-heading font-bold text-xl rounded-xl ${classes} ${
+      className={`cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-xl rounded-xl ${classes} ${
         hiddenOnMobile ? 'hidden lg:block' : ''
       }`}
     >
