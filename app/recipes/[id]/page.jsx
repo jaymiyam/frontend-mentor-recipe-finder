@@ -1,6 +1,7 @@
 import recipes from '@/data.json';
 import BulletPoint from '@/components/BulletPoint.tsx';
 import RecipeCard from '@/components/RecipeCard.tsx';
+import FadeInTransition from '@/components/FadeInTransition.tsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -24,7 +25,7 @@ const RecipePage = async ({ params }) => {
         <div className="py-16 md:py-20 border-b border-b-neutral-200">
           {/* Breadcrumbs */}
           <div className="mb-4 text-lg">
-            <Link href="/recipes" className="opacity-80">
+            <Link href="/recipes" className="opacity-80 hover:text-neutral-900">
               Recipes /{' '}
             </Link>
             <span className="text-neutral-900 font-semibold">
@@ -130,25 +131,27 @@ const RecipePage = async ({ params }) => {
           </div>
         </div>
         {/* More recipes */}
-        <div className="py-16 md:py-20 border-b border-b-neutral-200">
-          <h2 className="font-heading text-neutral-900 tracking-tight font-bold text-4xl leading-tight mb-6">
-            More recipes
-          </h2>
-          <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
-            {moreRecipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.id}
-                id={recipe.id.toString()}
-                image={recipe.image.small}
-                title={recipe.title}
-                overview={recipe.overview}
-                servings={recipe.servings}
-                prepTime={recipe.prepMinutes}
-                cookTime={recipe.cookMinutes}
-              />
-            ))}
+        <FadeInTransition>
+          <div className="py-16 md:py-20 border-b border-b-neutral-200">
+            <h2 className="font-heading text-neutral-900 tracking-tight font-bold text-4xl leading-tight mb-6">
+              More recipes
+            </h2>
+            <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {moreRecipes.map((recipe) => (
+                <RecipeCard
+                  key={recipe.id}
+                  id={recipe.id.toString()}
+                  image={recipe.image.small}
+                  title={recipe.title}
+                  overview={recipe.overview}
+                  servings={recipe.servings}
+                  prepTime={recipe.prepMinutes}
+                  cookTime={recipe.cookMinutes}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </FadeInTransition>
       </div>
     </section>
   );

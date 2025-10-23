@@ -205,7 +205,7 @@ const RecipeFilterForm = ({
           />
         </svg>
         <input
-          className="w-full text-base focus:outline-none"
+          className="w-full text-base"
           type="text"
           name="query"
           id="query"

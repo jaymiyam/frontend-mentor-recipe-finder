@@ -9,6 +9,7 @@ export default function PageTransition({
   const containerRef = useRef(null);
   const pathname = usePathname();
 
+  //   when pathname changes, trigger the useEffect of fading in the ref, page content is updated with children
   useEffect(() => {
     if (containerRef.current) {
       gsap.fromTo(
