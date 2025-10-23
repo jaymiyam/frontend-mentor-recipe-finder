@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import localFont from 'next/font/local';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import PageTransition from '@/components/PageTransition';
 
 export const metadata: Metadata = {
   title: 'Healthy Recipe Finder',
@@ -45,7 +46,7 @@ export default function RootLayout({
     <html lang="en" className={`${nunito.variable} ${nunitoSans.variable}`}>
       <body className="font-body bg-neutral-100 text-neutral-800 text-xl">
         <Navbar />
-        <main>{children}</main>
+        <PageTransition>{children}</PageTransition>
         <Footer />
       </body>
     </html>
