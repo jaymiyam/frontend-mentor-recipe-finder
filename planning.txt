@@ -6,17 +6,15 @@
 |-about
     |-page (done)
 |-recipes
-    |-page
+    |-page (done)
     |-[id]
-        |-page
+        |-page (done)
 |- error page
 |- loading page
 |- not found page
 
 functionality
-- search by name or ingredient
-- filter by max prep time
-- filter by max cook time
-- mongoDB for database (?)
-- cloudinary for cloud images
-- CRUD of recipes
+- search by name or ingredient (done)
+- filter by max prep time (done)
+- filter by max cook time (done)
+- cloudinary for cloud images (done)

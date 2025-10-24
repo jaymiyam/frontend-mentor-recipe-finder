@@ -5,7 +5,11 @@ import FadeInTransition from '@/components/FadeInTransition.tsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const RecipePage = async ({ params }) => {
+type RecipePageProps = {
+  params: Promise<{ id: string }>;
+};
+
+const RecipePage = async ({ params }: RecipePageProps) => {
   const { id } = await params;
 
   const recipe = recipes.find((r) => String(r.id) === id);
