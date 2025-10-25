@@ -9,9 +9,9 @@
     |-page (done)
     |-[id]
         |-page (done)
-|- error page
-|- loading page
-|- not found page
+|- error page (done)
+|- loading page (done)
+|- not found page (done)
 
 functionality
 - search by name or ingredient (done)

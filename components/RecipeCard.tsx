@@ -29,7 +29,7 @@ export default function RecipeCard({
           width={1024}
           height={1024}
           alt={title}
-          className="object-cover object-center"
+          className="w-full h-full block object-cover object-center"
         />
       </div>
 

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
@@ -82,18 +82,21 @@ export default function Navbar() {
             <nav className=" flex flex-col">
               <Link
                 href="/"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`cursor-pointer px-2 py-3 font-heading font-semibold text-lg`}
               >
                 Home
               </Link>
               <Link
                 href="/about"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`cursor-pointer px-2 py-3 font-heading font-semibold text-lg `}
               >
                 About
               </Link>
               <Link
                 href="/recipes"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`cursor-pointer px-2 py-3 font-heading font-semibold text-lg `}
               >
                 Recipes
@@ -101,7 +104,8 @@ export default function Navbar() {
             </nav>
             <Link
               href="/recipes"
-              className="block w-full px-4 py-3 bg-neutral-900 text-center text-white font-heading font-bold text-xl rounded-xl"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block w-full px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-center text-white font-heading font-bold text-xl rounded-xl"
             >
               Browser recipes
             </Link>
