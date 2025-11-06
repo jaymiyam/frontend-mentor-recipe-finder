@@ -1,0 +1,22 @@
+Database
+1. create MongoDB Database
+2. database connection & mongoose
+3. user model
+4. recipe model
+5. fetch from database using server actions
+
+Authentication & authorization
+1. Google OAuth setup
+2. Next Auth & provider setup
+3. add signin button
+4. save user to database and session
+5. profile image
+6. sign out button
+7. protecting routes
+
+Creating recipes
+1. Add recipe form
+2. Server actions
+3. verifications
+4. submit recipe to database
+5. cloudinary image upload

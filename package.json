@@ -12,7 +12,10 @@
     "@gsap/react": "^2.1.2",
     "cloudinary": "^2.8.0",
     "gsap": "^3.13.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.3",
     "next": "15.5.2",
+    "next-auth": "^4.24.13",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

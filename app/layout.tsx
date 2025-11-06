@@ -5,6 +5,7 @@ import localFont from 'next/font/local';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
+import AuthProvider from '@/components/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Healthy Recipe Finder',
@@ -43,12 +44,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={`${nunito.variable} ${nunitoSans.variable}`}>
-      <body className="font-body bg-neutral-100 text-neutral-800 text-xl">
-        <Navbar />
-        <PageTransition>{children}</PageTransition>
-        <Footer />
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en" className={`${nunito.variable} ${nunitoSans.variable}`}>
+        <body className="font-body bg-neutral-100 text-neutral-800 text-xl">
+          <Navbar />
+          <PageTransition>{children}</PageTransition>
+          <Footer />
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

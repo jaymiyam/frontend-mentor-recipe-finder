@@ -1,13 +1,28 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RecipeCard from '@/components/RecipeCard';
 import RecipeFilterForm from '@/components/RecipeFilterForm';
-import recipes from '@/data.json';
+import { RecipeType } from '@/models/Recipe';
 
 export default function RecipesPage() {
+  const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [maxCooktime, setMaxCooktime] = useState(20);
   const [maxPreptime, setMaxPreptime] = useState(15);
+
+  useEffect(() => {
+    async function fetchRecipes() {
+      try {
+        const res = await fetch('/api/recipes');
+        const data = await res.json();
+        setRecipes(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchRecipes();
+  }, []);
 
   // filteredRecipes will be updated whenever searchQuery change and trigger re-render
   const filteredRecipes = recipes.filter((r) => {
@@ -51,8 +66,8 @@ export default function RecipesPage() {
           ) : (
             filteredRecipes.map((recipe) => (
               <RecipeCard
-                key={recipe.id}
-                id={recipe.id.toString()}
+                key={recipe._id.toString()}
+                id={recipe._id.toString()}
                 image={recipe.image.small}
                 title={recipe.title}
                 overview={recipe.overview}

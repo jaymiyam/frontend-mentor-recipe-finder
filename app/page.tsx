@@ -8,8 +8,10 @@ import wholeFood from '@/assets/images/icon-whole-food-recipes.svg';
 import minimumFuss from '@/assets/images/icon-minimum-fuss.svg';
 import searchInSeconds from '@/assets/images/icon-search-in-seconds.svg';
 import realLife from '@/assets/images/image-home-real-life-large.webp';
+import connectDB from '@/config/database';
 
 export default function HomePage() {
+  connectDB();
   return (
     <>
       <section className="w-full bg-[url('/images/pattern-squiggle-1.svg')] bg-contain bg-no-repeat bg-[center_top_17%]">

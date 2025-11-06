@@ -1,14 +1,30 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
 import { usePathname } from 'next/navigation';
 import PrimaryButton from './PrimaryButton';
+import profileDefault from '@/assets/images/profile.png';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 export default function Navbar() {
+  const { data: session } = useSession();
+  const profileImage = session?.user?.image;
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [providers, setProviders] = useState(null);
   const path = usePathname();
+
+  useEffect(() => {
+    const setAuthProviders = async () => {
+      const res = await getProviders();
+      setProviders(res);
+    };
+
+    setAuthProviders();
+  }, []);
 
   return (
     <header className=" border-b border-neutral-300 px-8 lg:px-15 py-5">
@@ -48,34 +64,105 @@ export default function Navbar() {
             Recipes
           </Link>
         </nav>
-        <PrimaryButton
-          text="Browse Recipes"
-          classes="justify-self-end px-4 py-3"
-          hiddenOnMobile
-          path="/recipes"
-        />
-
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="block lg:hidden relative cursor-pointer bg-neutral-200 p-3 rounded-sm"
-        >
-          <span className="sr-only">Open main menu</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="16"
-            fill="none"
-            viewBox="0 0 18 16"
-          >
-            <path
-              fill="#163A34"
-              fillRule="evenodd"
-              d="M17 16H1a1 1 0 1 1 0-2h16a1 1 0 1 1 0 2ZM17 2H1a1 1 0 1 1 0-2h16a1 1 0 1 1 0 2ZM17 9H1a1 1 0 1 1 0-2h16a1 1 0 1 1 0 2Z"
-              clipRule="evenodd"
+        {/* Menu before sign in */}
+        {!session && (
+          <div className="justify-self-end">
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  key={provider.id}
+                  type="button"
+                  onClick={() => signIn(provider.id)}
+                  className={`cursor-pointer  px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-xl rounded-xl`}
+                >
+                  Sign in
+                </button>
+              ))}
+          </div>
+        )}
+        {/* Menu after signed in */}
+        {session && (
+          <div className="justify-self-end flex gap-4">
+            <PrimaryButton
+              text="Share recipe"
+              path="/recipes/add"
+              classes="px-4 py-3"
+              hiddenOnMobile
             />
-          </svg>
-        </button>
+            <button
+              type="button"
+              className="cursor-pointer relative flex justify-center items-center text-sm "
+              id="user-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+              onClick={() => setIsProfileMenuOpen((prev) => !prev)}
+            >
+              <span className="sr-only">Open user menu</span>
+              <Image
+                className="h-10 w-10 rounded-full"
+                src={profileImage || profileDefault}
+                alt=""
+                width={40}
+                height={40}
+              />
+            </button>
+            {/* <!-- Profile dropdown --> */}
+            {isProfileMenuOpen && (
+              <div
+                id="user-menu"
+                className="absolute top-full right-0 mt-2 z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+              >
+                <Link
+                  href="/profile"
+                  className="block px-4 py-2 text-sm text-neutral-900"
+                  role="menuitem"
+                  id="user-menu-item-0"
+                  onClick={() => {
+                    setIsProfileMenuOpen(false);
+                  }}
+                >
+                  Your recipes
+                </Link>
+                <button
+                  onClick={() => {
+                    setIsProfileMenuOpen(false);
+                    signOut({ callbackUrl: '/' });
+                  }}
+                  className="cursor-pointer block px-4 py-2 text-sm text-neutral-900"
+                  role="menuitem"
+                  id="user-menu-item-2"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="block lg:hidden relative cursor-pointer bg-neutral-200 p-3 rounded-sm"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="16"
+                fill="none"
+                viewBox="0 0 18 16"
+              >
+                <path
+                  fill="#163A34"
+                  fillRule="evenodd"
+                  d="M17 16H1a1 1 0 1 1 0-2h16a1 1 0 1 1 0 2ZM17 2H1a1 1 0 1 1 0-2h16a1 1 0 1 1 0 2ZM17 9H1a1 1 0 1 1 0-2h16a1 1 0 1 1 0 2Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+
         {/* Mobile Nav and Button */}
         {isMobileMenuOpen && (
           <div className="absolute z-99 w-full top-[150%] left-0 p-2 bg-white border border-neutral-300 rounded-lg shadow-md">
@@ -103,11 +190,11 @@ export default function Navbar() {
               </Link>
             </nav>
             <Link
-              href="/recipes"
+              href="/recipes/add"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-center text-white font-heading font-bold text-xl rounded-xl"
+              className={`cursor-pointer px-2 py-3 block w-full text-center bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-xl rounded-xl `}
             >
-              Browser recipes
+              Share recipe
             </Link>
           </div>
         )}

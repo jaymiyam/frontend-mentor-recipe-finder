@@ -1,9 +1,12 @@
-import recipes from '@/data.json';
 import BulletPoint from '@/components/BulletPoint.tsx';
 import RecipeCard from '@/components/RecipeCard.tsx';
 import FadeInTransition from '@/components/FadeInTransition.tsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import connectDB from '@/config/database';
+import Recipe from '@/models/Recipe';
+import { Key } from 'react';
+import { RecipeType } from '@/models/Recipe';
 
 type RecipePageProps = {
   params: Promise<{ id: string }>;
@@ -12,14 +15,20 @@ type RecipePageProps = {
 const RecipePage = async ({ params }: RecipePageProps) => {
   const { id } = await params;
 
-  const recipe = recipes.find((r) => String(r.id) === id);
+  await connectDB();
+  const recipes = await Recipe.find({}).lean<RecipeType[]>();
+  const recipe = await Recipe.findById(id).lean<RecipeType>();
 
   if (!recipe) {
-    return <p>Recipe not found.</p>;
+    return (
+      <h1 className="text-center text-2xl font-bold mt-10">
+        Sorry, recipe not found
+      </h1>
+    );
   }
 
   const moreRecipes = recipes
-    .filter((r) => String(r.id) !== id) //filter out current recipe
+    .filter((r) => String(r._id) !== id) //filter out current recipe
     .sort(() => 0.5 - Math.random()) //use a random +ve/-ve number to shuffle recipes
     .slice(0, 3); //slice and pick out first 3 recipes
 
@@ -45,6 +54,7 @@ const RecipePage = async ({ params }: RecipePageProps) => {
                 height={1200}
                 alt=""
                 className="rounded-2xl"
+                priority
               />
             </div>
             <div className="flex flex-col gap-6 items-start justify-center">
@@ -119,7 +129,7 @@ const RecipePage = async ({ params }: RecipePageProps) => {
                 Ingredients:
               </h3>
               <div className="grid gap-2 mb-4">
-                {recipe.ingredients.map((item, index) => (
+                {recipe.ingredients.map((item: string, index: Key) => (
                   <BulletPoint key={index} text={item} noTitle />
                 ))}
               </div>
@@ -127,7 +137,7 @@ const RecipePage = async ({ params }: RecipePageProps) => {
                 Instructions:
               </h3>
               <div className="grid gap-2 mb-4">
-                {recipe.instructions.map((item, index) => (
+                {recipe.instructions.map((item: string, index: Key) => (
                   <BulletPoint key={index} text={item} noTitle />
                 ))}
               </div>
@@ -143,8 +153,8 @@ const RecipePage = async ({ params }: RecipePageProps) => {
             <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {moreRecipes.map((recipe) => (
                 <RecipeCard
-                  key={recipe.id}
-                  id={recipe.id.toString()}
+                  key={recipe._id.toString()}
+                  id={recipe._id.toString()}
                   image={recipe.image.small}
                   title={recipe.title}
                   overview={recipe.overview}
