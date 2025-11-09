@@ -11,13 +11,6 @@ const RecipeSchema = new Schema(
       type: String,
       required: true,
     },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
     image: {
       large: {
         type: String,
@@ -51,7 +44,7 @@ const Recipe = models.Recipe || model('Recipe', RecipeSchema);
 export default Recipe;
 
 export type RecipeType = {
-  _id: string;
+  owner: string;
   title: string;
   overview: string;
   servings: number;

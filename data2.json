@@ -1,7 +1,6 @@
 [
   {
     "title": "Mediterranean Chickpea Salad",
-    "slug": "mediterranean-chickpea-salad",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191099/mediterranean-chickpea-salad-large_oxhf33.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191099/mediterranean-chickpea-salad-small_w9jrh0.webp"
@@ -30,7 +29,6 @@
   },
   {
     "title": "Avocado & Tomato Wholegrain Toast",
-    "slug": "avocado-tomato-wholegrain-toast",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191099/avocado-tomato-wholegrain-toast-large_sdcr7p.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191099/avocado-tomato-wholegrain-toast-small_ablcf5.webp"
@@ -56,7 +54,6 @@
   },
   {
     "title": "One-Pan Lemon Garlic Salmon with Asparagus",
-    "slug": "one-pan-lemon-garlic-salmon-with-asparagus",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191100/salmon-asparagus-large_o7b3hy.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191100/salmon-asparagus-small_xsihjj.webp"
@@ -83,7 +80,6 @@
   },
   {
     "title": "Quinoa Veggie Power Bowl",
-    "slug": "quinoa-veggie-power-bowl",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191100/quinoa-veggie-bowl-large_bbknu3.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191100/quinoa-veggie-bowl-small_snl3su.webp"
@@ -112,7 +108,6 @@
   },
   {
     "title": "Sweet Potato Black Bean Tacos",
-    "slug": "sweet-potato-black-bean-tacos",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191101/sweet-potato-tacos-large_hhsims.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191101/sweet-potato-tacos-small_sl0brd.webp"
@@ -141,7 +136,6 @@
   },
   {
     "title": "Greek Yogurt Berry Parfait",
-    "slug": "greek-yogurt-berry-parfait",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191100/greek-yogurt-large_kbydks.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191100/greek-yogurt-small_ssa3pm.webp"
@@ -165,7 +159,6 @@
   },
   {
     "title": "Lentil & Spinach Soup",
-    "slug": "lentil-spinach-soup",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191100/lentil-soup-large_jdfh4s.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191099/lentil-soup-small_dqcqp6.webp"
@@ -197,7 +190,6 @@
   },
   {
     "title": "Banana Oat Pancakes",
-    "slug": "banana-oat-pancakes",
     "image": {
       "large": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191099/banana-pancakes-large_lqh95k.webp",
       "small": "https://res.cloudinary.com/jaymiyam-dev/image/upload/v1761191099/banana-pancakes-small_ecc0ys.webp"

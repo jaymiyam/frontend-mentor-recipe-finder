@@ -4,11 +4,17 @@ import RecipeCard from '@/components/RecipeCard';
 import RecipeFilterForm from '@/components/RecipeFilterForm';
 import { RecipeType } from '@/models/Recipe';
 
+type RecipeDataType = RecipeType & {
+  _id: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
 export default function RecipesPage() {
-  const [recipes, setRecipes] = useState<RecipeType[]>([]);
+  const [recipes, setRecipes] = useState<RecipeDataType[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [maxCooktime, setMaxCooktime] = useState(20);
-  const [maxPreptime, setMaxPreptime] = useState(15);
+  const [maxCooktime, setMaxCooktime] = useState(120);
+  const [maxPreptime, setMaxPreptime] = useState(120);
 
   useEffect(() => {
     async function fetchRecipes() {

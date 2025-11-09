@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import PrimaryButton from './PrimaryButton';
 import profileDefault from '@/assets/images/profile.png';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
+import { ClientSafeProvider } from 'next-auth/react';
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -14,7 +15,10 @@ export default function Navbar() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [providers, setProviders] = useState(null);
+  const [providers, setProviders] = useState<Record<
+    string,
+    ClientSafeProvider
+  > | null>(null);
   const path = usePathname();
 
   useEffect(() => {
