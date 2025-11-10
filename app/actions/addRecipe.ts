@@ -17,8 +17,6 @@ const addRecipe = async (formData: AddRecipeFormValues) => {
     throw new Error('A valid user is required to submit recipes');
   }
 
-  console.log(formData.image[0]);
-
   //   handle image file upload to cloudinary and store the image url
   const imageBuffer = await formData.image[0].arrayBuffer();
   const imageData = Buffer.from(imageBuffer);

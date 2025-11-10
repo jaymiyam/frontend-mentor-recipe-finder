@@ -154,13 +154,9 @@ const AddRecipeForm = ({ defaultValues }: AddRecipeFormProps) => {
     setValue('instructions', next, { shouldDirty: true, shouldValidate: true });
   };
 
-  const onSubmit = (data: AddRecipeFormValues) => {
-    addRecipe(data);
-  };
-
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(addRecipe)}
       noValidate
       className="w-full flex flex-col gap-y-6 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm"
     >
@@ -262,23 +258,22 @@ const AddRecipeForm = ({ defaultValues }: AddRecipeFormProps) => {
       </fieldset>
 
       <fieldset className="grid gap-y-4">
-        <label htmlFor="image">
-          <span className="block text-lg font-semibold text-neutral-900">
-            Recipe image
+        <legend className="block text-lg font-semibold text-neutral-900">
+          Recipe image
+        </legend>
+        <input
+          type="file"
+          id="image"
+          className="max-w-[220px] file:cursor-pointer file:rounded-lg file:border file:border-neutral-300 file:px-3 file:py-2 text-base file:outline-none file:focus:border-neutral-900 file:focus:ring-2 file:focus:ring-neutral-900/20"
+          accept="image/*"
+          placeholder="testing"
+          {...register('image')}
+        />
+        {errors.image && errors.image.message === 'string' && (
+          <span id="overview-error" className="text-sm text-red-600">
+            {errors.image.message}
           </span>
-          <input
-            type="file"
-            id="image"
-            className="rounded-lg border border-neutral-300 px-3 py-2 text-base outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/20"
-            accept="image/*"
-            {...register('image')}
-          />
-          {errors.image && errors.image.message === 'string' && (
-            <span id="overview-error" className="text-sm text-red-600">
-              {errors.image.message}
-            </span>
-          )}
-        </label>
+        )}
       </fieldset>
 
       <fieldset className="grid gap-y-4">
@@ -300,7 +295,7 @@ const AddRecipeForm = ({ defaultValues }: AddRecipeFormProps) => {
                   type="button"
                   onClick={() => removeIngredient(index)}
                   disabled={ingredients.length === 1}
-                  className="rounded-md border border-neutral-300 px-2 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="cursor-pointer rounded-md border border-neutral-300 px-2 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   Remove
                 </button>
@@ -320,7 +315,7 @@ const AddRecipeForm = ({ defaultValues }: AddRecipeFormProps) => {
         <button
           type="button"
           onClick={appendIngredient}
-          className="inline-flex w-fit items-center gap-x-2 rounded-md border border-neutral-300 px-3 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
+          className="cursor-pointer inline-flex w-fit items-center gap-x-2 rounded-md border border-neutral-300 px-3 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
         >
           Add ingredient
         </button>
@@ -350,7 +345,7 @@ const AddRecipeForm = ({ defaultValues }: AddRecipeFormProps) => {
                   type="button"
                   onClick={() => removeInstruction(index)}
                   disabled={instructions.length === 1}
-                  className="rounded-md border border-neutral-300 px-2 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="cursor-pointer rounded-md border border-neutral-300 px-2 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   Remove
                 </button>
@@ -370,7 +365,7 @@ const AddRecipeForm = ({ defaultValues }: AddRecipeFormProps) => {
         <button
           type="button"
           onClick={appendInstruction}
-          className="inline-flex w-fit items-center gap-x-2 rounded-md border border-neutral-300 px-3 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
+          className="cursor-pointer inline-flex w-fit items-center gap-x-2 rounded-md border border-neutral-300 px-3 py-2 text-sm font-medium text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
         >
           Add instruction
         </button>
@@ -386,7 +381,7 @@ const AddRecipeForm = ({ defaultValues }: AddRecipeFormProps) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center justify-center gap-x-2 rounded-md bg-neutral-900 px-4 py-2 text-xl font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-500"
+          className="cursor-pointer inline-flex items-center justify-center gap-x-2 rounded-md bg-neutral-900 px-4 py-2 text-xl font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-500"
         >
           {isSubmitting ? 'Saving…' : 'Share recipe'}
         </button>

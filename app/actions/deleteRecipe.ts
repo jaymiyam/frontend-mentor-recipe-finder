@@ -1,0 +1,39 @@
+'use server';
+import connectDB from '@/config/database';
+import Recipe from '@/models/Recipe';
+import cloudinary from '@/config/cloudinary';
+import { getSessionUser } from '@/utils/getSessionUser';
+import { revalidatePath } from 'next/cache';
+
+const deleteRecipe = async (recipeId: string) => {
+  const sessionUser = await getSessionUser();
+  if (!sessionUser) {
+    throw new Error('A valid user is required to submit recipes');
+  }
+
+  await connectDB();
+  const targetRecipe = await Recipe.findById(recipeId);
+  if (!targetRecipe) {
+    throw new Error('Recipe not found.');
+  }
+
+  //   validate ownership of the recipe
+  if (targetRecipe.owner.toString() !== sessionUser.user.id) {
+    throw new Error('Not authorized to delete this recipe.');
+  }
+
+  const imageIds = Object.values(targetRecipe.image).map((imagePath) => {
+    const parts = imagePath.split('/');
+    return parts.at(-1).split('.').at(0);
+  });
+
+  for (const id of imageIds) {
+    await cloudinary.uploader.destroy('/healthy-recipe-finder' + id);
+  }
+
+  await targetRecipe.deleteOne();
+
+  revalidatePath('/', 'layout');
+};
+
+export default deleteRecipe;

@@ -1,7 +1,9 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import deleteRecipe from '@/app/actions/deleteRecipe';
 
-type RecipeCardProps = {
+type UserRecipeCardProps = {
   id: string;
   image: string;
   title: string;
@@ -11,7 +13,7 @@ type RecipeCardProps = {
   cookTime: number;
 };
 
-export default function RecipeCard({
+export default function UserRecipeCard({
   id,
   image,
   title,
@@ -19,10 +21,21 @@ export default function RecipeCard({
   servings,
   prepTime,
   cookTime,
-}: RecipeCardProps) {
+}: UserRecipeCardProps) {
   const formattedTitle = title.length > 30 ? `${title.slice(0, 30)}...` : title;
   const formattedOverview =
     overview.length > 100 ? `${overview.slice(0, 80)}...` : overview;
+
+  const handleDeleteRecipe = async (recipeId: string) => {
+    const confirmed = window.confirm(
+      'Are your sure you want to delete this recipe?'
+    );
+
+    if (!confirmed) return;
+
+    await deleteRecipe(recipeId);
+  };
+
   return (
     <div className="w-full md:max-w-[376px] h-full bg-white rounded-sm p-2 flex flex-col gap-4 justify-between leading-tight">
       <div className="w-full rounded-sm overflow-hidden max-h-[300px]">
@@ -101,11 +114,17 @@ export default function RecipeCard({
         </span>
       </div>
       <Link
-        href={`/recipes/${id}`}
-        className="bg-neutral-900 text-white text-center text-base font-semibold rounded-full py-3"
+        href={`/recipes/${id}/edit`}
+        className="bg-neutral-900 hover:bg-neutral-800 text-white text-center text-base font-semibold rounded-full py-3"
       >
-        View Recipe
+        Edit recipe
       </Link>
+      <button
+        onClick={() => handleDeleteRecipe(id)}
+        className="cursor-pointer bg-white text-red-500 border border-red-500 text-center text-base font-semibold rounded-full py-3 hover:bg-red-500 hover:text-white"
+      >
+        Delete recipe
+      </button>
     </div>
   );
 }
