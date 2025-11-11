@@ -2,6 +2,5 @@
   command = "npm run build"
   publish = ".next"
 
-[[edge_functions]]
-  path = "/(.*)"
-  function = "nextAuthMiddleware"
+[[plugins]]
+  package = "@netlify/next"
