@@ -5,6 +5,11 @@ import cloudinary from '@/config/cloudinary';
 import { getSessionUser } from '@/utils/getSessionUser';
 import { revalidatePath } from 'next/cache';
 
+type RecipeImage = {
+  large: string;
+  small: string;
+};
+
 const deleteRecipe = async (recipeId: string) => {
   const sessionUser = await getSessionUser();
   if (!sessionUser) {
@@ -22,13 +27,15 @@ const deleteRecipe = async (recipeId: string) => {
     throw new Error('Not authorized to delete this recipe.');
   }
 
-  const imageIds = Object.values(targetRecipe.image).map((imagePath) => {
+  const images = targetRecipe.image as RecipeImage;
+
+  const imageIds = Object.values(images).map((imagePath) => {
     const parts = imagePath.split('/');
-    return parts.at(-1).split('.').at(0);
+    return parts.at(-1)?.split('.').at(0);
   });
 
   for (const id of imageIds) {
-    await cloudinary.uploader.destroy('/healthy-recipe-finder' + id);
+    await cloudinary.uploader.destroy(`healthy-recipe-finder/${id}`);
   }
 
   await targetRecipe.deleteOne();
