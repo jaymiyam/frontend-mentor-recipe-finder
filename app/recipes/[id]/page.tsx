@@ -6,7 +6,7 @@ import Link from 'next/link';
 import connectDB from '@/config/database';
 import Recipe from '@/models/Recipe';
 import { Key } from 'react';
-import { RecipeType } from '@/models/Recipe';
+import { RecipeDataType } from '../page';
 
 type RecipePageProps = {
   params: Promise<{ id: string }>;
@@ -16,8 +16,8 @@ const RecipePage = async ({ params }: RecipePageProps) => {
   const { id } = await params;
 
   await connectDB();
-  const recipes = await Recipe.find({}).lean<RecipeType[]>();
-  const recipe = await Recipe.findById(id).lean<RecipeType>();
+  const recipes = await Recipe.find({}).lean<RecipeDataType[]>();
+  const recipe = await Recipe.findById(id).lean<RecipeDataType>();
 
   if (!recipe) {
     return (
