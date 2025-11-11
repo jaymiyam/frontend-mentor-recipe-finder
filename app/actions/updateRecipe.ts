@@ -25,6 +25,7 @@ const updateRecipe = async (
     throw new Error('Recipe not found');
   }
 
+  // validate ownership
   if (targetRecipe.owner.toString() !== sessionUser.user.id) {
     throw new Error('You are not authorized to edit this recipe.');
   }

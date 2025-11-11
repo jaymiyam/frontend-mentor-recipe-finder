@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import type { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, FormEvent, SetStateAction } from 'react';
 
 type RecipeFilterFormProps = {
   searchQuery: string;
@@ -22,8 +22,15 @@ const RecipeFilterForm = ({
   const [showMaxCooktime, setShowMaxCooktime] = useState(false);
   const [showMaxPreptime, setShowMaxPreptime] = useState(false);
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
-    <form className="mb-6 flex flex-col gap-2 md:flex-row justify-between md:items-center">
+    <form
+      onSubmit={handleSubmit}
+      className="mb-6 flex flex-col gap-2 md:flex-row justify-between md:items-center"
+    >
       <div className="flex flex-col md:flex-row gap-2 justify-start items-center">
         {/* Max prep time filter */}
         <div className="relative w-full">

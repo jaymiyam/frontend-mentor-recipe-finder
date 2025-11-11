@@ -95,7 +95,7 @@ export default function Navbar() {
             />
             <button
               type="button"
-              className="cursor-pointer relative flex justify-center items-center text-sm "
+              className="cursor-pointer relative flex justify-center items-center text-sm shrink-0"
               id="user-menu-button"
               aria-expanded="false"
               aria-haspopup="true"

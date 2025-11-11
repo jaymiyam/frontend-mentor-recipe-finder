@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import updateRecipe from '@/app/actions/updateRecipe';
@@ -60,6 +61,7 @@ const EditRecipeForm = ({ recipe }: EditRecipeFormProps) => {
     instructions: recipe.instructions,
   };
 
+  //   react-hook-form set up with zod schema validation
   const {
     register,
     setValue,
@@ -78,6 +80,7 @@ const EditRecipeForm = ({ recipe }: EditRecipeFormProps) => {
   const ingredients = watch('ingredients') ?? [];
   const instructions = watch('instructions') ?? [];
 
+  //   dynamically render ingredient fields
   const appendIngredient = () => {
     const next = [...ingredients, ''];
     setValue('ingredients', next, { shouldDirty: true, shouldValidate: true });
@@ -95,6 +98,7 @@ const EditRecipeForm = ({ recipe }: EditRecipeFormProps) => {
     setValue('ingredients', next, { shouldDirty: true, shouldValidate: true });
   };
 
+  //   dynamically render instruction fields
   const appendInstruction = () => {
     const next = [...instructions, ''];
     setValue('instructions', next, { shouldDirty: true, shouldValidate: true });
@@ -325,6 +329,13 @@ const EditRecipeForm = ({ recipe }: EditRecipeFormProps) => {
       </fieldset>
 
       <div className="flex items-center justify-end gap-x-3">
+        <Link
+          href="/profile"
+          className={`cursor-pointer hover:bg-neutral-100 text-neutral-800 border border-neutral-800 font-heading font-bold text-xl rounded-xl px-4 py-2
+      }`}
+        >
+          Cancel
+        </Link>
         <button
           type="submit"
           disabled={isSubmitting}

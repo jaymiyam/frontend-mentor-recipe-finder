@@ -2,6 +2,7 @@ import connectDB from '@/config/database';
 import Recipe from '@/models/Recipe';
 import { NextResponse } from 'next/server';
 
+// API endpoint settings for GET request to '/api/recipes'
 export async function GET() {
   try {
     await connectDB();

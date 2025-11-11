@@ -18,8 +18,8 @@ export default async function ProfilePage() {
     <section>
       <div className="max-w-[1200px] mx-8 xl:mx-auto">
         {/* Hero section */}
-        <div className="py-16 md:py-20 text-left md:text-center text-pretty flex flex-col items-center justify-center">
-          <h1 className=" font-heading font-extrabold tracking-tight text-neutral-900 text-4xl md:text-5xl mb-4">
+        <div className="py-8 md:py-16 text-left md:text-center text-pretty flex flex-col items-center justify-center">
+          <h1 className=" font-heading font-extrabold tracking-tight text-neutral-900 text-4xl md:text-5xl">
             Your recipes
           </h1>
         </div>
