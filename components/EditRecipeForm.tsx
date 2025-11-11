@@ -1,17 +1,11 @@
 'use client';
-import addRecipe from '@/app/actions/addRecipe';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import updateRecipe from '@/app/actions/updateRecipe';
+import { RecipeDataType } from '@/app/recipes/page';
 import { z } from 'zod';
 
-// Schema for recipe object
-const ACCEPTED_FILE_TYPES = [
-  'image/jpeg',
-  'image/png',
-  'image/jpg',
-  'image/webp',
-];
-const addRecipeSchema = z.object({
+export const editRecipeSchema = z.object({
   title: z
     .string()
     .min(3, 'Give the recipe a descriptive title.')
@@ -35,19 +29,6 @@ const addRecipeSchema = z.object({
     .int('Cook time must be a whole number.')
     .min(0, 'Cook time cannot be negative.')
     .max(120, 'Cook time seems too long (max 120 minutes).'),
-  image: z
-    .any()
-    .refine((files) => files instanceof FileList && files.length > 0, {
-      message: 'Please upload an image.',
-    })
-    .refine(
-      (files) =>
-        files instanceof FileList &&
-        ACCEPTED_FILE_TYPES.includes(files[0]?.type),
-      {
-        message: 'Only .jpeg, .jpg or .png formats are supported.',
-      }
-    ),
   ingredients: z
     .array(
       z
@@ -62,20 +43,23 @@ const addRecipeSchema = z.object({
     .min(1, 'Add at least one instruction step.'),
 });
 
-export type AddRecipeFormValues = z.infer<typeof addRecipeSchema>;
+export type EditRecipeFormValues = z.infer<typeof editRecipeSchema>;
 
-const defaultFormValues: AddRecipeFormValues = {
-  title: '',
-  overview: '',
-  servings: 1,
-  prepMinutes: 0,
-  cookMinutes: 0,
-  image: null,
-  ingredients: [''],
-  instructions: [''],
+type EditRecipeFormProps = {
+  recipe: RecipeDataType;
 };
 
-const AddRecipeForm = () => {
+const EditRecipeForm = ({ recipe }: EditRecipeFormProps) => {
+  const defaultValues = {
+    title: recipe.title,
+    overview: recipe.overview,
+    servings: recipe.servings,
+    prepMinutes: recipe.prepMinutes,
+    cookMinutes: recipe.cookMinutes,
+    ingredients: recipe.ingredients,
+    instructions: recipe.instructions,
+  };
+
   const {
     register,
     setValue,
@@ -83,11 +67,11 @@ const AddRecipeForm = () => {
     watch,
     formState: { errors, isSubmitting },
     unregister,
-  } = useForm<AddRecipeFormValues>({
-    resolver: zodResolver(addRecipeSchema),
+  } = useForm<EditRecipeFormValues>({
+    resolver: zodResolver(editRecipeSchema),
     mode: 'onBlur',
     reValidateMode: 'onChange',
-    defaultValues: defaultFormValues,
+    defaultValues: defaultValues,
   });
 
   // watch and keep a live copy of ingredients and instructions input fields
@@ -128,9 +112,17 @@ const AddRecipeForm = () => {
     setValue('instructions', next, { shouldDirty: true, shouldValidate: true });
   };
 
+  const onSubmit = async (formData: EditRecipeFormValues) => {
+    try {
+      await updateRecipe(recipe._id, formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <form
-      onSubmit={handleSubmit(addRecipe)}
+      onSubmit={handleSubmit(onSubmit)}
       noValidate
       className="w-full flex flex-col gap-y-6 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm"
     >
@@ -229,25 +221,6 @@ const AddRecipeForm = () => {
             )}
           </label>
         </div>
-      </fieldset>
-
-      <fieldset className="grid gap-y-4">
-        <legend className="block text-lg font-semibold text-neutral-900">
-          Recipe image (cannot be changed after submit)
-        </legend>
-        <input
-          type="file"
-          id="image"
-          className="max-w-[220px] file:cursor-pointer file:rounded-lg file:border file:border-neutral-300 file:px-3 file:py-2 text-base file:outline-none file:focus:border-neutral-900 file:focus:ring-2 file:focus:ring-neutral-900/20"
-          accept="image/*"
-          placeholder="testing"
-          {...register('image')}
-        />
-        {errors.image && errors.image.message === 'string' && (
-          <span id="overview-error" className="text-sm text-red-600">
-            {errors.image.message}
-          </span>
-        )}
       </fieldset>
 
       <fieldset className="grid gap-y-4">
@@ -357,11 +330,11 @@ const AddRecipeForm = () => {
           disabled={isSubmitting}
           className="cursor-pointer inline-flex items-center justify-center gap-x-2 rounded-md bg-neutral-900 px-4 py-2 text-xl font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-500"
         >
-          {isSubmitting ? 'Saving…' : 'Share recipe'}
+          {isSubmitting ? 'Saving…' : 'Update recipe'}
         </button>
       </div>
     </form>
   );
 };
 
-export default AddRecipeForm;
+export default EditRecipeForm;

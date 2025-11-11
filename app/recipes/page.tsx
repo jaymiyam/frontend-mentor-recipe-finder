@@ -4,7 +4,7 @@ import RecipeCard from '@/components/RecipeCard';
 import RecipeFilterForm from '@/components/RecipeFilterForm';
 import { RecipeType } from '@/models/Recipe';
 
-type RecipeDataType = RecipeType & {
+export type RecipeDataType = RecipeType & {
   _id: string;
   createdAt?: Date;
   updatedAt?: Date;
