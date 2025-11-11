@@ -2,6 +2,14 @@ import GoogleProvider from 'next-auth/providers/google';
 import connectDB from '@/config/database';
 import User from '@/models/User';
 
+// Validate environment variables
+if (
+  !process.env.GOOGLE_OAUTH_CLIENT_ID ||
+  !process.env.GOOGLE_OAUTH_CLIENT_SECRET
+) {
+  throw new Error('Missing Google OAuth credentials in environment variables');
+}
+
 export const authOptions = {
   providers: [
     GoogleProvider({
