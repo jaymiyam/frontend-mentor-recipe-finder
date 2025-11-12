@@ -14,16 +14,14 @@ All resources in the project credited to [Frontend Mentor](https://www.frontendm
 - **Full Responsiveness** with TailwindCSS
 - **Search & Filtering** of recipe data
 - **Cloud Image Assets** with Cloudinary
+- **OAuth Authentication** with NextAuth
+- **Recipes CRUD functionality** with MongoDB
 
 ## Tech Stack
 
-- Next.js
-- React
-- TailwindCSS
-- GSAP
-- Cloudinary
-
-## Purpose
-
-This project was created for **learning and experimentation**.  
-It mainly showcases how to combine **Next.js** with **GSAP** to build a realistic usable website.
+- Framework: Next.js, React
+- Styling & Animation: TailwindCSS, GSAP
+- Cloud Image Management: Cloudinary
+- Authentication: Google OAuth, NextAuth
+- Database Management: MongoDB, Mongoose
+- Form Building & Validation: React-hook-form, Zod
