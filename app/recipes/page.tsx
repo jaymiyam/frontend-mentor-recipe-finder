@@ -15,6 +15,7 @@ export default function RecipesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [maxCooktime, setMaxCooktime] = useState(120);
   const [maxPreptime, setMaxPreptime] = useState(120);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -24,6 +25,8 @@ export default function RecipesPage() {
         setRecipes(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -67,7 +70,9 @@ export default function RecipesPage() {
         />
         {/* Recipe Cards Grid */}
         <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20 border-b border-b-neutral-200">
-          {filteredRecipes.length === 0 ? (
+          {loading ? (
+            <p>Loading recipes...</p>
+          ) : filteredRecipes.length === 0 ? (
             <p>No recipes found</p>
           ) : (
             filteredRecipes.map((recipe) => (
