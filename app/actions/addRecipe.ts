@@ -9,46 +9,51 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 const addRecipe = async (formData: AddRecipeFormValues) => {
-  await connectDB();
+  try {
+    await connectDB();
 
-  const sessionUser = await getSessionUser();
+    const sessionUser = await getSessionUser();
 
-  if (!sessionUser) {
-    throw new Error('A valid user is required to submit recipes');
+    if (!sessionUser) {
+      throw new Error('A valid user is required to submit recipes');
+    }
+
+    //   handle image file upload to cloudinary and store the image url
+    const imageBuffer = await formData.image[0].arrayBuffer();
+    const imageData = Buffer.from(imageBuffer);
+    const imageString = imageData.toString('base64');
+    const dataUri = `data:image/png;base64,${imageString}`;
+    const imageUploadResult = await cloudinary.uploader.upload(dataUri, {
+      folder: 'healthy-recipe-finder',
+    });
+
+    const largeImageUrl = imageUploadResult.secure_url;
+    const smallImageUrl = largeImageUrl.replace('/upload', '/upload/w_600/');
+
+    const recipeData: RecipeType = {
+      owner: sessionUser.user.id,
+      title: formData.title,
+      overview: formData.overview,
+      servings: formData.servings,
+      prepMinutes: formData.prepMinutes,
+      cookMinutes: formData.cookMinutes,
+      image: {
+        large: largeImageUrl,
+        small: smallImageUrl,
+      },
+      ingredients: formData.ingredients,
+      instructions: formData.instructions,
+    };
+
+    const newRecipe = new Recipe(recipeData);
+    await newRecipe.save();
+
+    revalidatePath('/', 'layout');
+    redirect(`/recipes/${newRecipe._id}`);
+  } catch (error) {
+    console.error('Failed to add recipe:', error);
+    throw new Error('Failed to add recipe. Please try again.');
   }
-
-  //   handle image file upload to cloudinary and store the image url
-  const imageBuffer = await formData.image[0].arrayBuffer();
-  const imageData = Buffer.from(imageBuffer);
-  const imageString = imageData.toString('base64');
-  const dataUri = `data:image/png;base64,${imageString}`;
-  const imageUploadResult = await cloudinary.uploader.upload(dataUri, {
-    folder: 'healthy-recipe-finder',
-  });
-
-  const largeImageUrl = imageUploadResult.secure_url;
-  const smallImageUrl = largeImageUrl.replace('/upload', '/upload/w_600/');
-
-  const recipeData: RecipeType = {
-    owner: sessionUser.user.id,
-    title: formData.title,
-    overview: formData.overview,
-    servings: formData.servings,
-    prepMinutes: formData.prepMinutes,
-    cookMinutes: formData.cookMinutes,
-    image: {
-      large: largeImageUrl,
-      small: smallImageUrl,
-    },
-    ingredients: formData.ingredients,
-    instructions: formData.instructions,
-  };
-
-  const newRecipe = new Recipe(recipeData);
-  await newRecipe.save();
-
-  revalidatePath('/', 'layout');
-  redirect(`/recipes/${newRecipe._id}`);
 };
 
 export default addRecipe;
