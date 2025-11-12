@@ -16,7 +16,7 @@ export default async function ProfilePage() {
 
   return (
     <section>
-      <div className="max-w-[1200px] mx-8 xl:mx-auto">
+      <div className="max-w-[1200px] mx-4 md:mx-8 xl:mx-auto">
         {/* Hero section */}
         <div className="py-8 md:py-16 text-left md:text-center text-pretty flex flex-col items-center justify-center">
           <h1 className=" font-heading font-extrabold tracking-tight text-neutral-900 text-4xl md:text-5xl">

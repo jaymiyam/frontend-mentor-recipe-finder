@@ -24,7 +24,7 @@ export default function RecipeCard({
   const formattedOverview =
     overview.length > 100 ? `${overview.slice(0, 80)}...` : overview;
   return (
-    <div className="w-full md:max-w-[376px] h-full bg-white rounded-sm p-2 flex flex-col gap-4 justify-between leading-tight">
+    <div className="w-full md:max-w-[360px] h-full bg-white rounded-sm p-2 flex flex-col gap-4 justify-between leading-tight">
       <div className="w-full rounded-sm overflow-hidden max-h-[300px]">
         <Image
           src={image}

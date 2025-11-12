@@ -34,7 +34,7 @@ const RecipePage = async ({ params }: RecipePageProps) => {
 
   return (
     <section>
-      <div className="max-w-[1200px] mx-8 xl:mx-auto">
+      <div className="max-w-[1200px] mx-4 md:mx-8 xl:mx-auto">
         <div className="py-16 md:py-20 border-b border-b-neutral-200">
           {/* Breadcrumbs */}
           <div className="mb-4 text-lg">

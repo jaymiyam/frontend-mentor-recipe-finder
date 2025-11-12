@@ -31,7 +31,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className=" border-b border-neutral-300 px-8 lg:px-15 py-5">
+    <header className=" border-b border-neutral-300 px-4 md:px-8 lg:px-15 py-5">
       <div className="relative mx-auto flex justify-between items-center lg:grid lg:grid-cols-3  lg:justify-items-center">
         <Link href="/" className="cursor-pointer justify-self-start">
           <Image
@@ -68,7 +68,7 @@ export default function Navbar() {
             Recipes
           </Link>
         </nav>
-        <div className="flex gap-4">
+        <div className="flex gap-2 md:gap-4">
           {/* Menu before sign in */}
           {!session && (
             <div className="justify-self-end">
@@ -78,7 +78,7 @@ export default function Navbar() {
                     key={provider.id}
                     type="button"
                     onClick={() => signIn(provider.id)}
-                    className={`cursor-pointer  px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-xl rounded-xl`}
+                    className={`cursor-pointer shrink-0 whitespace-nowrap px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-base md:text-xl rounded-xl`}
                   >
                     Sign in
                   </button>
