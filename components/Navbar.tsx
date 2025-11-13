@@ -19,7 +19,15 @@ export default function Navbar() {
     string,
     ClientSafeProvider
   > | null>(null);
+
   const path = usePathname();
+
+  const handleSignIn = async (providerId: string) => {
+    console.log('redirect');
+    await signIn(providerId, {
+      callbackUrl: '/auth/refresh',
+    });
+  };
 
   useEffect(() => {
     const setAuthProviders = async () => {
@@ -77,7 +85,7 @@ export default function Navbar() {
                   <button
                     key={provider.id}
                     type="button"
-                    onClick={() => signIn(provider.id)}
+                    onClick={() => handleSignIn(provider.id)}
                     className={`cursor-pointer shrink-0 whitespace-nowrap px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-base md:text-xl rounded-xl`}
                   >
                     Sign in
@@ -195,13 +203,15 @@ export default function Navbar() {
                 Recipes
               </Link>
             </nav>
-            <Link
-              href="/recipes/add"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`cursor-pointer px-2 py-3 block w-full text-center bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-xl rounded-xl `}
-            >
-              Share recipe
-            </Link>
+            {session && (
+              <Link
+                href="/recipes/add"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`cursor-pointer px-2 py-3 block w-full text-center bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-xl rounded-xl `}
+              >
+                Share recipe
+              </Link>
+            )}
           </div>
         )}
       </div>
