@@ -10,7 +10,8 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import { ClientSafeProvider } from 'next-auth/react';
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === 'authenticated';
   const profileImage = session?.user?.image;
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -78,13 +79,14 @@ export default function Navbar() {
         </nav>
         <div className="flex gap-2 md:gap-4">
           {/* Menu before sign in */}
-          {!session && (
+          {!isLoggedIn && (
             <div className="justify-self-end">
               {providers &&
                 Object.values(providers).map((provider) => (
                   <button
                     key={provider.id}
                     type="button"
+                    disabled={status === 'loading'}
                     onClick={() => handleSignIn(provider.id)}
                     className={`cursor-pointer shrink-0 whitespace-nowrap px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-white font-heading font-bold text-base md:text-xl rounded-xl`}
                   >
@@ -94,7 +96,7 @@ export default function Navbar() {
             </div>
           )}
           {/* Menu after signed in */}
-          {session && (
+          {isLoggedIn && (
             <div className="justify-self-end flex gap-4">
               <PrimaryButton
                 text="Share recipe"

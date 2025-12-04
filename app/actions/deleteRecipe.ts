@@ -36,7 +36,11 @@ const deleteRecipe = async (recipeId: string) => {
   });
 
   for (const id of imageIds) {
-    await cloudinary.uploader.destroy(`healthy-recipe-finder/${id}`);
+    try {
+      await cloudinary.uploader.destroy(`healthy-recipe-finder/${id}`);
+    } catch (error) {
+      console.log('Cloudinary destroy failed', id, error);
+    }
   }
 
   await targetRecipe.deleteOne();

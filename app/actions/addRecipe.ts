@@ -18,13 +18,20 @@ const addRecipe = async (formData: AddRecipeFormValues) => {
   }
 
   //   handle image file upload to cloudinary and store the image url
-  const imageBuffer = await formData.image[0].arrayBuffer();
-  const imageData = Buffer.from(imageBuffer);
-  const imageString = imageData.toString('base64');
-  const dataUri = `data:image/png;base64,${imageString}`;
-  const imageUploadResult = await cloudinary.uploader.upload(dataUri, {
-    folder: 'healthy-recipe-finder',
-  });
+  let imageUploadResult;
+
+  try {
+    const imageBuffer = await formData.image[0].arrayBuffer();
+    const imageData = Buffer.from(imageBuffer);
+    const imageString = imageData.toString('base64');
+    const dataUri = `data:image/png;base64,${imageString}`;
+    imageUploadResult = await cloudinary.uploader.upload(dataUri, {
+      folder: 'healthy-recipe-finder',
+    });
+  } catch (error) {
+    console.log('Cloudinary upload failed', error);
+    throw new Error('Image upload failed. Please try again.');
+  }
 
   const largeImageUrl = imageUploadResult.secure_url;
   const smallImageUrl = largeImageUrl.replace('/upload', '/upload/w_600/');
