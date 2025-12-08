@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import RecipeCard from '@/components/RecipeCard';
+import RecipeCard from '@/components/UI/RecipeCard';
 import RecipeFilterForm from '@/components/RecipeFilterForm';
 import { RecipeType } from '@/models/Recipe';
 

@@ -2,9 +2,9 @@ import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import localFont from 'next/font/local';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import PageTransition from '@/components/PageTransition';
+import Navbar from '@/components/layouts/Navbar';
+import Footer from '@/components/layouts/Footer';
+import PageTransition from '@/components/UI/PageTransition';
 import AuthProvider from '@/components/AuthProvider';
 
 export const metadata: Metadata = {

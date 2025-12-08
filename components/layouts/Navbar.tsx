@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
 import { usePathname } from 'next/navigation';
-import PrimaryButton from './PrimaryButton';
+import PrimaryButton from '../UI/PrimaryButton';
 import profileDefault from '@/assets/images/profile.png';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import { ClientSafeProvider } from 'next-auth/react';

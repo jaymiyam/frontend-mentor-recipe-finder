@@ -1,5 +1,5 @@
 'use client';
-import PrimaryButton from '@/components/PrimaryButton';
+import PrimaryButton from '@/components/UI/PrimaryButton';
 
 type ErrorPageProps = {
   error: Error & { digest?: string };

@@ -1,7 +1,7 @@
 import { getSessionUser } from '@/utils/getSessionUser';
 import connectDB from '@/config/database';
 import Recipe from '@/models/Recipe';
-import UserRecipeCard from '@/components/UserRecipeCard';
+import UserRecipeCard from '@/components/UI/UserRecipeCard';
 
 export default async function ProfilePage() {
   const sessionUser = await getSessionUser();

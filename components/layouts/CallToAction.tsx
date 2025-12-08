@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import fork from '@/assets/images/pattern-fork.svg';
 import knife from '@/assets/images/pattern-knife.svg';
-import PrimaryButton from './PrimaryButton';
-import FadeInTransition from './FadeInTransition';
+import PrimaryButton from '../UI/PrimaryButton';
+import FadeInTransition from '../UI/FadeInTransition';
 
 export default function CallToAction() {
   return (
