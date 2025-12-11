@@ -1,4 +1,4 @@
-import AddRecipeForm from '@/components/AddRecipeForm';
+import AddRecipeForm from '@/components/forms/AddRecipeForm';
 
 export default function AddRecipePage() {
   return (

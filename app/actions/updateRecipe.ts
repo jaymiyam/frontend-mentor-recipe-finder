@@ -1,5 +1,5 @@
 'use server';
-import type { AddRecipeFormValues } from '@/components/AddRecipeForm';
+import type { AddRecipeFormValues } from '@/schemas/recipeSchema';
 import connectDB from '@/config/database';
 import Recipe from '@/models/Recipe';
 import { RecipeType } from '@/models/Recipe';

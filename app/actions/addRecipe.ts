@@ -1,5 +1,5 @@
 'use server';
-import type { AddRecipeFormValues } from '@/components/AddRecipeForm';
+import type { AddRecipeFormValues } from '@/schemas/recipeSchema';
 import connectDB from '@/config/database';
 import Recipe from '@/models/Recipe';
 import { RecipeType } from '@/models/Recipe';
@@ -21,7 +21,7 @@ const addRecipe = async (formData: AddRecipeFormValues) => {
   let imageUploadResult;
 
   try {
-    const imageBuffer = await formData.image[0].arrayBuffer();
+    const imageBuffer = await formData.image![0].arrayBuffer();
     const imageData = Buffer.from(imageBuffer);
     const imageString = imageData.toString('base64');
     const dataUri = `data:image/png;base64,${imageString}`;
