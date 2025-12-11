@@ -33,7 +33,12 @@ export default function UserRecipeCard({
 
     if (!confirmed) return;
 
-    await deleteRecipe(recipeId);
+    const result = await deleteRecipe(recipeId);
+
+    if (result?.success === false) {
+      window.alert(result.error);
+      return;
+    }
   };
 
   return (

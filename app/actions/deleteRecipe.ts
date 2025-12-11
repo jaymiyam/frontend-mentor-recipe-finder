@@ -15,17 +15,26 @@ const deleteRecipe = async (recipeId: string) => {
 
   const sessionUser = await getSessionUser();
   if (!sessionUser) {
-    throw new Error('A valid user is required to submit recipes');
+    // throw new Error('A valid user is required to submit recipes');
+    return {
+      success: false,
+      error: 'A valid user is required to submit recipes.',
+    };
   }
 
   const targetRecipe = await Recipe.findById(recipeId);
   if (!targetRecipe) {
-    throw new Error('Recipe not found.');
+    // throw new Error('Recipe not found.');
+    return { success: false, error: 'Recipe not found.' };
   }
 
   //   validate ownership of the recipe
   if (targetRecipe.owner.toString() !== sessionUser.user.id) {
-    throw new Error('Not authorized to delete this recipe.');
+    // throw new Error('Not authorized to delete this recipe.');
+    return {
+      success: false,
+      error: 'You are not authorized to delete this recipe.',
+    };
   }
 
   const images = targetRecipe.image as RecipeImage;
@@ -43,7 +52,15 @@ const deleteRecipe = async (recipeId: string) => {
     }
   }
 
-  await targetRecipe.deleteOne();
+  try {
+    await targetRecipe.deleteOne();
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: 'Sorry, something went wrong. Please try again.',
+    };
+  }
 
   revalidatePath('/', 'layout');
 };

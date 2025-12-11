@@ -14,7 +14,11 @@ const addRecipe = async (formData: AddRecipeFormValues) => {
   const sessionUser = await getSessionUser();
 
   if (!sessionUser) {
-    throw new Error('A valid user is required to submit recipes');
+    // throw new Error('A valid user is required to submit recipes');
+    return {
+      success: false,
+      error: 'A valid user is required to submit recipes',
+    };
   }
 
   //   handle image file upload to cloudinary and store the image url
@@ -30,7 +34,8 @@ const addRecipe = async (formData: AddRecipeFormValues) => {
     });
   } catch (error) {
     console.log('Cloudinary upload failed', error);
-    throw new Error('Image upload failed. Please try again.');
+    // throw new Error('Image upload failed. Please try again.');
+    return { success: false, error: 'Image upload failed. Please try again.' };
   }
 
   const largeImageUrl = imageUploadResult.secure_url;
@@ -52,7 +57,16 @@ const addRecipe = async (formData: AddRecipeFormValues) => {
   };
 
   const newRecipe = new Recipe(recipeData);
-  await newRecipe.save();
+
+  try {
+    await newRecipe.save();
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: 'Sorry, something went wrong. Please try again.',
+    };
+  }
 
   revalidatePath('/', 'layout');
   redirect(`/recipes/${newRecipe._id}`);

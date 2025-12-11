@@ -1,6 +1,6 @@
 import connectDB from '@/config/database';
 import Recipe from '@/models/Recipe';
-import EditRecipeForm from '@/components/EditRecipeForm';
+import EditRecipeForm from '@/components/forms/EditRecipeForm';
 import { convertToSerializeableObject } from '@/utils/convertToPlainObj';
 
 type EditRecipePageProps = {

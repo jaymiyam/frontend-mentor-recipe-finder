@@ -16,18 +16,27 @@ const updateRecipe = async (
   const sessionUser = await getSessionUser();
 
   if (!sessionUser) {
-    throw new Error('A valid user is required to submit recipes');
+    // throw new Error('A valid user is required to submit recipes');
+    return {
+      success: false,
+      error: 'A valid user is required to submit recipes.',
+    };
   }
 
   const targetRecipe = await Recipe.findById(recipeId);
 
   if (!targetRecipe) {
-    throw new Error('Recipe not found');
+    // throw new Error('Recipe not found');
+    return { success: false, error: 'Recipe not found.' };
   }
 
   // validate ownership
   if (targetRecipe.owner.toString() !== sessionUser.user.id) {
-    throw new Error('You are not authorized to edit this recipe.');
+    // throw new Error('You are not authorized to edit this recipe.');
+    return {
+      success: false,
+      error: 'You are not authorized to edit this recipe.',
+    };
   }
 
   const recipeData: Partial<RecipeType> = {
@@ -40,7 +49,16 @@ const updateRecipe = async (
     instructions: formData.instructions,
   };
 
-  const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, recipeData);
+  let updatedRecipe;
+  try {
+    updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, recipeData);
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: 'Sorry, something went wrong. Please try again.',
+    };
+  }
 
   revalidatePath('/', 'layout');
   redirect(`/recipes/${updatedRecipe._id}`);

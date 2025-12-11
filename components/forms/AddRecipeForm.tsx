@@ -7,7 +7,7 @@ import { useMultiStepForm } from '@/hooks/useMultiStepForm';
 import StepIngredients from './StepIngredients';
 import StepOverview from './StepOverview';
 import StepConfirm from './StepConfirm';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const defaultFormValues: AddRecipeFormValues = {
   title: '',
@@ -27,7 +27,7 @@ const AddRecipeForm = () => {
     reValidateMode: 'onChange',
     defaultValues: defaultFormValues,
   });
-
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const imageRef = useRef(null);
 
   const {
@@ -43,6 +43,15 @@ const AddRecipeForm = () => {
     <StepIngredients key="step-ingredients" form={form} />,
     <StepConfirm key="step-confirm" form={form} />,
   ]);
+
+  const onSubmit = async (values: AddRecipeFormValues) => {
+    const result = await addRecipe(values);
+
+    if (result?.success === false) {
+      setErrorMessage(result.error);
+      return;
+    }
+  };
 
   const handleNext = async () => {
     if (currentIndex === 0) {
@@ -77,7 +86,7 @@ const AddRecipeForm = () => {
 
   return (
     <form
-      onSubmit={form.handleSubmit(addRecipe)}
+      onSubmit={form.handleSubmit(onSubmit)}
       noValidate
       className="w-full flex flex-col gap-y-6 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm"
     >
@@ -118,6 +127,11 @@ const AddRecipeForm = () => {
           >
             {form.formState.isSubmitting ? 'Saving…' : 'Share recipe'}
           </button>
+        )}
+      </div>
+      <div className="flex items-center justify-end">
+        {errorMessage && (
+          <p className="text-base text-red-500">{errorMessage}</p>
         )}
       </div>
     </form>
