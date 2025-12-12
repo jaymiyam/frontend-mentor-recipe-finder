@@ -19,7 +19,7 @@ const RecipeHeader = ({
 }: RecipeHeaderProps) => {
   return (
     <div className="grid md:grid-cols-[60%_40%] gap-10 md:gap-14 pb-12 border-b border-b-neutral-200">
-      <div className="relative max-h-[500px] overflow-hidden rounded-2xl">
+      <div className="relative max-h-[500px] flex items-center justify-center overflow-hidden rounded-2xl">
         <Image src={image} width={1236} height={1200} alt="" priority />
       </div>
       <div className="flex flex-col gap-6 items-start justify-center">
